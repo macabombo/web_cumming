@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Cumming | Mapa Cultural del Barrio Yungay</title>
+    <meta name="description" content="Explora Calle Cumming y el Barrio Yungay en un mapa interactivo. Descubre patrimonio, cultura, historia y gastronomía en el corazón de Santiago.">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Estilos propios -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Header / Navegación -->
+    <header class="header" id="header">
+        <div class="header__inner">
+            <a href="#" class="header__logo">
+                <span class="logo-icon"><i class="fas fa-map-marked-alt"></i></span>
+                <span class="logo-text">Mi Cumming</span>
+            </a>
+            <nav class="header__nav" id="mainNav">
+                <a href="#mapa" class="nav-link active">Mapa</a>
+                <a href="#puntos" class="nav-link">Puntos de Interés</a>
+                <a href="#rutas" class="nav-link">Rutas</a>
+                <a href="#historia" class="nav-link">Historia</a>
+                <a href="#instagram" class="nav-link">Instagram</a>
+            </nav>
+            <button class="header__toggle" id="menuToggle" aria-label="Abrir menú">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero__overlay"></div>
+        <div class="hero__content">
+            <h1 class="hero__title">Descubre <span class="highlight">Calle Cumming</span></h1>
+            <p class="hero__subtitle">Un mapa interactivo del patrimonio cultural, histórico y gastronómico del Barrio Yungay y sus alrededores</p>
+            <a href="#mapa" class="hero__cta">
+                <i class="fas fa-compass"></i> Explorar el Mapa
+            </a>
+        </div>
+        <div class="hero__scroll">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Sección del Mapa -->
+    <section class="section section--mapa" id="mapa">
+        <div class="section__header">
+            <h2 class="section__title">Mapa Interactivo</h2>
+            <p class="section__desc">Explora los puntos de interés del sector. Usa las capas para filtrar por categoría.</p>
+        </div>
+
+        <!-- Controles de Capas -->
+        <div class="map-controls">
+            <div class="layer-buttons">
+                <button class="layer-btn active" data-layer="todos">
+                    <i class="fas fa-layer-group"></i> Todos
+                </button>
+                <button class="layer-btn" data-layer="patrimonio">
+                    <i class="fas fa-landmark"></i> Patrimonio
+                </button>
+                <button class="layer-btn" data-layer="cultural">
+                    <i class="fas fa-theater-masks"></i> Cultural
+                </button>
+                <button class="layer-btn" data-layer="gastronomia">
+                    <i class="fas fa-utensils"></i> Gastronomía
+                </button>
+                <button class="layer-btn" data-layer="parques">
+                    <i class="fas fa-tree"></i> Parques
+                </button>
+                <button class="layer-btn" data-layer="historia">
+                    <i class="fas fa-book-open"></i> Historia
+                </button>
+            </div>
+        </div>
+
+        <!-- Mapa -->
+        <div class="map-container">
+            <div id="map"></div>
+        </div>
+    </section>
+
+    <!-- Sección de Puntos de Interés -->
+    <section class="section section--puntos" id="puntos">
+        <div class="section__header">
+            <h2 class="section__title">Puntos de Interés</h2>
+            <p class="section__desc">Los lugares más destacados del sector, organizados por categoría.</p>
+        </div>
+        <div class="puntos-grid" id="puntosGrid">
+            <!-- Se llena con JavaScript -->
+        </div>
+    </section>
+
+    <!-- Sección de Rutas -->
+    <section class="section section--rutas" id="rutas">
+        <div class="section__header">
+            <h2 class="section__title">Rutas Sugeridas</h2>
+            <p class="section__desc">Recorridos temáticos para descubrir el sector a pie.</p>
+        </div>
+        <div class="rutas-grid">
+            <div class="ruta-card" data-ruta="patrimonial">
+                <div class="ruta-card__icon"><i class="fas fa-landmark"></i></div>
+                <h3 class="ruta-card__title">Ruta Patrimonial</h3>
+                <p class="ruta-card__desc">Recorre las construcciones más emblemáticas del Barrio Yungay. Desde la Plaza Yungay hasta los edificios históricos de Calle Cumming.</p>
+                <div class="ruta-card__meta">
+                    <span><i class="fas fa-walking"></i> 45 min</span>
+                    <span><i class="fas fa-map-pin"></i> 6 puntos</span>
+                </div>
+                <button class="ruta-card__btn" data-route="patrimonial">
+                    <i class="fas fa-play"></i> Ver Ruta
+                </button>
+            </div>
+            <div class="ruta-card" data-ruta="cultural">
+                <div class="ruta-card__icon"><i class="fas fa-palette"></i></div>
+                <h3 class="ruta-card__title">Ruta Cultural</h3>
+                <p class="ruta-card__desc">Museos, galerías y espacios artísticos. Descubre la escena cultural del barrio y sus alrededores.</p>
+                <div class="ruta-card__meta">
+                    <span><i class="fas fa-walking"></i> 1 hora</span>
+                    <span><i class="fas fa-map-pin"></i> 8 puntos</span>
+                </div>
+                <button class="ruta-card__btn" data-route="cultural">
+                    <i class="fas fa-play"></i> Ver Ruta
+                </button>
+            </div>
+            <div class="ruta-card" data-ruta="gastro">
+                <div class="ruta-card__icon"><i class="fas fa-coffee"></i></div>
+                <h3 class="ruta-card__title">Ruta Gastronómica</h3>
+                <p class="ruta-card__desc">Cafés de especialidad, restaurantes locales y mercados. Sabores que cuentan la historia del barrio.</p>
+                <div class="ruta-card__meta">
+                    <span><i class="fas fa-walking"></i> 1.5 horas</span>
+                    <span><i class="fas fa-map-pin"></i> 7 puntos</span>
+                </div>
+                <button class="ruta-card__btn" data-route="gastro">
+                    <i class="fas fa-play"></i> Ver Ruta
+                </button>
+            </div>
+            <div class="ruta-card" data-ruta="parques">
+                <div class="ruta-card__icon"><i class="fas fa-leaf"></i></div>
+                <h3 class="ruta-card__title">Ruta Verde</h3>
+                <p class="ruta-card__desc">Parques, plazas y espacios verdes. Conecta con la naturaleza en pleno centro de Santiago.</p>
+                <div class="ruta-card__meta">
+                    <span><i class="fas fa-walking"></i> 30 min</span>
+                    <span><i class="fas fa-map-pin"></i> 4 puntos</span>
+                </div>
+                <button class="ruta-card__btn" data-route="verde">
+                    <i class="fas fa-play"></i> Ver Ruta
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Historia -->
+    <section class="section section--historia" id="historia">
+        <div class="section__header">
+            <h2 class="section__title">Historia del Sector</h2>
+            <p class="section__desc">Una línea de tiempo con los momentos más importantes de Calle Cumming y el Barrio Yungay.</p>
+        </div>
+        <div class="timeline">
+            <div class="timeline__item">
+                <div class="timeline__dot"></div>
+                <div class="timeline__content">
+                    <span class="timeline__year">1541</span>
+                    <h3>Fundación de Santiago</h3>
+                    <p>Pedro de Valdivia funda la ciudad de Santiago. El sector de lo que hoy es el Barrio Yungay queda dentro de los límites originales de la ciudad colonial.</p>
+                </div>
+            </div>
+            <div class="timeline__item">
+                <div class="timeline__dot"></div>
+                <div class="timeline__content">
+                    <span class="timeline__year">1814</span>
+                    <h3>Batalla de Rancagua</h3>
+                    <p>Tras la derrota patriota, el sector suvre las consecuencias de la guerra. Varios edificios de la zona son dañados durante el periodo de reconquista.</p>
+                </div>
+            </div>
+            <div class="timeline__item">
+                <div class="timeline__dot"></div>
+                <div class="timeline__content">
+                    <span class="timeline__year">1869</span>
+                    <h3>Creación de Quinta Normal</h3>
+                    <p>Se establece el Parque Quinta Normal y los terrenos circundantes comienzan a urbanizarse. Calle Cumming toma forma como vía importante del sector.</p>
+                </div>
+            </div>
+            <div class="timeline__item">
+                <div class="timeline__dot"></div>
+                <div class="timeline__content">
+                    <span class="timeline__year">1872</span>
+                    <h3>Plaza Yungay</h3>
+                    <p>La Plaza Yungay se consolida como punto central del barrio. Se bautiza en honor a la Batalla de Yungay (1839), momento clave de la Guerra contra la Confederación Perú-Boliviana.</p>
+                </div>
+            </div>
+            <div class="timeline__item">
+                <div class="timeline__dot"></div>
+                <div class="timeline__content">
+                    <span class="timeline__year">1900-1930</span>
+                    <h3>Edad de Oro Arquitectónica</h3>
+                    <p>El sector vive suauge de construcción. Se levantan las casonas y edificios eclécticos, neoclásicos y art nouveau que hoy definen el carácter patrimonial de Calle Cumming.</p>
+                </div>
+            </div>
+            <div class="timeline__item">
+                <div class="timeline__dot"></div>
+                <div class="timeline__content">
+                    <span class="timeline__year">1941</span>
+                    <h3>Celestino Freire</h3>
+                    <p>El reconocido pintor abre su taller en el sector. Cumming se convierte en un punto de encuentro de artistas e intelectuales santiaguinos.</p>
+                </div>
+            </div>
+            <div class="timeline__item">
+                <div class="timeline__dot"></div>
+                <div class="timeline__content">
+                    <span class="timeline__year">1973</span>
+                    <h3>Golpe de Estado</h3>
+                    <p>El barrio es escenario de intensos enfrentamientos. La Plaza Yungay y Calle Cumming son puntos de resistencia. Muchos vecinos son detenidos desaparecidos.</p>
+                </div>
+            </div>
+            <div class="timeline__item">
+                <div class="timeline__dot"></div>
+                <div class="timeline__content">
+                    <span class="timeline__year">2010</span>
+                    <h3>Museo de la Memoria</h3>
+                    <p>Se inaugura el Museo de la Memoria y los Derechos Humanos en las cercanías, marcando un hito en la recuperación memoria del sector.</p>
+                </div>
+            </div>
+            <div class="timeline__item">
+                <div class="timeline__dot"></div>
+                <div class="timeline__content">
+                    <span class="timeline__year">2015 - Hoy</span>
+                    <h3>Renacimiento Cultural</h3>
+                    <p>El Barrio Yungay y Calle Cumming experimentan un renacimiento. Nuevos cafés, galerías, espacios culturales y una creciente comunidad de artistas revitalizan el sector, convirtiéndolo en uno de los barrios más vibrantes de Santiago.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Instagram -->
+    <section class="section section--instagram" id="instagram">
+        <div class="section__header">
+            <h2 class="section__title">Síguenos en Instagram</h2>
+            <p class="section__desc">@micumming — Tu guía cultural del Barrio Yungay</p>
+        </div>
+        <div class="instagram-preview">
+            <div class="ig-card">
+                <div class="ig-card__img" style="background: linear-gradient(135deg, #2D4A3E, #8B6914);">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span>Post 1</span>
+                </div>
+                <div class="ig-card__body">
+                    <h3>Presentación del Proyecto</h3>
+                    <p>Conoce Mi Cumming, tu nueva guía para explorar el patrimonio del Barrio Yungay.</p>
+                </div>
+            </div>
+            <div class="ig-card">
+                <div class="ig-card__img" style="background: linear-gradient(135deg, #6B3A2A, #D4A574);">
+                    <i class="fas fa-landmark"></i>
+                    <span>Post 2</span>
+                </div>
+                <div class="ig-card__body">
+                    <h3>Punto de Interés: Plaza Yungay</h3>
+                    <p>Descubre la historia y los secretos de una de las plazas más emblemáticas de Santiago.</p>
+                </div>
+            </div>
+            <div class="ig-card">
+                <div class="ig-card__img" style="background: linear-gradient(135deg, #4A3728, #A67C52);">
+                    <i class="fas fa-book-open"></i>
+                    <span>Post 3</span>
+                </div>
+                <div class="ig-card__body">
+                    <h3>Dato Curioso: La Casa del Pintor Freire</h3>
+                    <p>El taller de Celestino Freire en Calle Cumming y su legado en el arte chileno.</p>
+                </div>
+            </div>
+        </div>
+        <div class="instagram-cta">
+            <a href="https://www.instagram.com/" target="_blank" class="btn btn--ig">
+                <i class="fab fa-instagram"></i> Seguir @micumming
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer__inner">
+            <div class="footer__brand">
+                <span class="logo-icon"><i class="fas fa-map-marked-alt"></i></span>
+                <span class="logo-text">Mi Cumming</span>
+                <p>Mapa cultural interactivo del Barrio Yungay, Santiago de Chile.</p>
+            </div>
+            <div class="footer__links">
+                <h4>Explora</h4>
+                <a href="#mapa">Mapa</a>
+                <a href="#puntos">Puntos de Interés</a>
+                <a href="#rutas">Rutas</a>
+                <a href="#historia">Historia</a>
+            </div>
+            <div class="footer__social">
+                <h4>Síguenos</h4>
+                <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p>&copy; 2026 Mi Cumming. Proyecto cultural y patrimonial.</p>
+        </div>
+    </footer>
+
+    <!-- Modal de Punto de Interés -->
+    <div class="modal" id="puntoModal">
+        <div class="modal__overlay" id="modalOverlay"></div>
+        <div class="modal__content">
+            <button class="modal__close" id="modalClose"><i class="fas fa-times"></i></button>
+            <div class="modal__badge" id="modalBadge"></div>
+            <h2 class="modal__title" id="modalTitle"></h2>
+            <p class="modal__desc" id="modalDesc"></p>
+            <div class="modal__details" id="modalDetails"></div>
+            <a href="#mapa" class="modal__map-btn" id="modalMapBtn">
+                <i class="fas fa-map-marker-alt"></i> Ver en el Mapa
+            </a>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
